@@ -3,7 +3,7 @@ import React from 'react'
 
 const Content = () => {
   return (
-    <div>
+    <div className='flex items-center justify-center'>
       This is a content
     </div>
   )
