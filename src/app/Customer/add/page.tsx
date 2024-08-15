@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import CustomerTable from "../../../../component/CustomerTable";
 import CustomInput from "../../../../component/CustomInput";
 
 const Add = () => {
