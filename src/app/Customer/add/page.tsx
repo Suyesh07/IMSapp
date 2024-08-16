@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import CustomInput from "../../../../component/CustomInput";
+import axios from "axios";
 
 const Add = () => {
   const [firstName, setFirstName] = useState("");
@@ -12,6 +13,63 @@ const Add = () => {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [zip, setZip] = useState("");
+  const token =
+    "eyJpZCI6MTIsImZpcnN0X25hbWUiOiJiaGF0IiwibWlkZGxlX25hbWUiOm51bGwsImxhc3RfbmFtZSI6ImJoYXR0YXJhaSIsImVtYWlsIjoiYmhoYXR0dEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR3Nklrb1ZoVU5xdm91dUx0M0cyNXVPWW15bGpvVnR1L2NYSnd0aFFIVTlOYXpRUlFhRDJCaSIsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDI0LTA3LTMxVDA2OjI3OjU1Ljc5NloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNy0zMVQwNjoyNzo1NS43OTZaIiwiaWF0IjoxNzIyNDg5Nzg4fQ";
+
+  const createCustomer = async () => {
+    const isVendor=""
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/customers",
+        {
+          name: `${firstName} ${lastName}`,
+          is_vender: isVendor,
+          email: email,
+          phone: phone,
+          street_address: "brt",
+          city: "brt",
+          province: "koshi",
+          zip_code: 45678,
+        },
+        {
+          headers: {
+            "Content-Type": "Application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const updateCustomer = async () => {
+    const isVendor = "";
+    try {
+      const response = await axios.patch(
+        "http://localhost:8000/customers",
+        {
+          name: `${firstName} ${lastName}`,
+          is_vender: isVendor,
+          email: email,
+          phone: phone,
+          street_address: "brt",
+          city: "brt",
+          province: "koshi",
+          zip_code: 45678,
+        },
+        {
+          headers: {
+            "Content-Type": "Application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="bg-slate-200 w-full flex items-center justify-center my-3">
@@ -90,6 +148,7 @@ const Add = () => {
         <input
           type="submit"
           value="Submit"
+          onClick={createCustomer}
           className="mt-12 border-none w-40 p-1 rounded-lg bg-blue-600 text-white"
         ></input>
       </form>

@@ -1,8 +1,6 @@
 "use client"
 import Sidebar from "../../component/Sidebar";
-import Content from "../../component/Content";
 import Header from "../../component/Header";
-import TestComponent from "../../component/TestComponent";
 
 export default function Home() {
   return (
@@ -14,8 +12,6 @@ export default function Home() {
         <h1 className="flex justify-center text-center text-2xl leading-tight tracking-tighter">
           Prabhat is a Bad Boy
         </h1>
-        <Content />
-        <TestComponent/>
       </div>
     </>
   );
