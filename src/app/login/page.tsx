@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import CustomInput from "../../../component/CustomInput";
+import CustomInput from "../../component/CustomInput";
 
 const Login = () => {
   const [email, setEmail] = useState("");
