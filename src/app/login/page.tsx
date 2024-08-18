@@ -1,10 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import CustomInput from "../../component/CustomInput";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    Cookies.set("token", "abc")
+  }
   return (
     <div className="flex flex-col m-8 items-center justify-center bg-slate-300 rounded-xl py-9 w-2/3 shadow-sm shadow-zinc-500">
       <CustomInput
