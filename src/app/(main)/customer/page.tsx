@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import CustomerTable from "../../../component/CustomerTable";
+import CustomerTable from "@/component/CustomerTable";
 import { useRouter } from "next/navigation";
 
 const Customer = () => {
   const router = useRouter();
   return (
     <div className=" h-full overflow-hidden flex items-center flex-col">
-      <div className="flex justify-between w-[95%] px-4 py-4  border-black bg-slate-500 rounded-xl text-white">
+      <div className="flex justify-between w-[95%] px-4 py-4 shadow-lg shadow-orange-600  border-black bg-slate-500 rounded-xl text-white">
         <p className="text-2xl">Customer/ Vendor</p>
         <button
           onClick={(e) => {

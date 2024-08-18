@@ -3,7 +3,7 @@ import React from "react";
 
 function CustomInput(props: any) {
   return (
-    <div className="flex flex-col w-[70%] gap-2">
+    <div className="flex flex-col w-[70%] gap-2 ">
       <label htmlFor="form">{props.label}</label>
       <input
         className="rounded pl-2 bg-gray-100 h-9"

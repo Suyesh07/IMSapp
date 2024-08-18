@@ -61,11 +61,11 @@ const CustomerTable = () => {
       console.error(error);
     }
   };
-  const deleteCustomer = async () => {
+  const deleteCustomer = async (id: string) => {
     const isVendor = "";
     try {
       const response = await axios.delete(
-        "http://localhost:8000/customers/1",
+        `http://localhost:8000/customers/${id}`,
         {
           headers: {
             "Content-Type": "Application/json",
