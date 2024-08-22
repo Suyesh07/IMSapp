@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import CustomInput from "../../component/CustomInput";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter()
 
   const handleSubmit = async () => {
     try {
@@ -24,6 +26,8 @@ const Login = () => {
       );
       const token = response.data.token;
       Cookies.set("token", token);
+      router.push("/dashboard")
+
     } catch (error) {
       console.error(error);
     }

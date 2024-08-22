@@ -14,8 +14,8 @@ const Add = () => {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [zip, setZip] = useState("");
-  const [is_vendor, setIs_vendor] = useState(false)
-  
+  const [is_vendor, setIs_vendor] = useState(false);
+
   let customerSchema = object({
     firstName: string().required("firstname is required"),
     lastName: string().required("lastname is required"),
@@ -27,29 +27,34 @@ const Add = () => {
     zip: number().nullable(),
     is_vendor: boolean().required(),
   });
-   
-  const handleSubmit = async (e:any) => {
-    e.preventDefault();
-    let formData = {
-      firstName: e.target[0].value,
-      lastName: e.target[1].value,
-      email: e.target[2].value,
-      phone: e.target[3].value,
-      province: e.target[4].value,
-      city: e.target[5].value,
-      street: e.target[6].value,
-      zip: e.target[7].value,
-      is_vendor: e.target[8].value,
-    };
-    const isValid = await customerSchema.isValid(formData);
-    console.log(isValid)
-  }
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    console.log(data)
+
+    let formData=Object.fromEntries(data);
+
+    // let formData = {
+    //   firstName: e.target[0].value,
+    //   lastName: e.target[1].value,
+    //   email: e.target[2].value,
+    //   phone: e.target[3].value,
+    //   province: e.target[4].value,
+    //   city: e.target[5].value,
+    //   street: e.target[6].value,
+    //   zip: e.target[7].value,
+    //   is_vendor: e.target[8].value,
+    // };
+    const isValid = await customerSchema.isValid(formData);
+    console.log(isValid);
+    createCustomer()
+    updateCustomer()
+  };
 
   const token =
     "eyJpZCI6MTIsImZpcnN0X25hbWUiOiJiaGF0IiwibWlkZGxlX25hbWUiOm51bGwsImxhc3RfbmFtZSI6ImJoYXR0YXJhaSIsImVtYWlsIjoiYmhoYXR0dEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR3Nklrb1ZoVU5xdm91dUx0M0cyNXVPWW15bGpvVnR1L2NYSnd0aFFIVTlOYXpRUlFhRDJCaSIsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDI0LTA3LTMxVDA2OjI3OjU1Ljc5NloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNy0zMVQwNjoyNzo1NS43OTZaIiwiaWF0IjoxNzIyNDg5Nzg4fQ";
 
-  
   const createCustomer = async () => {
     try {
       const response = await axios.post(
@@ -114,6 +119,7 @@ const Add = () => {
           label="First Name"
           placeholder="Enter your first name"
           value={firstName}
+          name="firstName"
           onChange={(e: any) => setFirstName(e.target.value)}
         />
         <br />
@@ -121,6 +127,7 @@ const Add = () => {
           label="Last Name"
           placeholder="Enter your last name"
           value={lastName}
+          name="lastName"
           onChange={(e: any) => setLastName(e.target.value)}
         />
         <br />
@@ -177,15 +184,16 @@ const Add = () => {
             defaultValue="no"
             className="mt-4 "
             checked={is_vendor}
-            onChange={(e)=>setIs_vendor(e.target.checked)}
+            onChange={(e) => setIs_vendor(e.target.checked)}
           />
         </div>
-        <input
+        <button
           type="submit"
-          value="Submit"
-          onClick={createCustomer}
+          // onClick={createCustomer}
           className="mt-12 border-none w-40 p-1 rounded-lg bg-blue-600 text-white"
-        ></input>
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

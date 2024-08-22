@@ -13,7 +13,7 @@ const Customer = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            router.push("/customer/add");
+            router.push("/dashboard/customer/add");
           }}
           className="rounded-xl w-28 h-8 bg-slate-900 text-white"
         >

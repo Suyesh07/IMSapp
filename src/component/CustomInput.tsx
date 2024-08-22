@@ -11,6 +11,7 @@ function CustomInput(props: any) {
         placeholder={props.placeholder}
         value={props.value}
         onChange={props.onChange}
+        name={props.name}
       />
     </div>
   );

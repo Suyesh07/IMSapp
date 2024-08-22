@@ -2,10 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const logout = () => {
+    Cookies.remove("token");
+    router.push("/login");
+  };
 
   return (
     <>
@@ -22,54 +29,56 @@ const Sidebar = () => {
           </Link>
           <Link
             className={`link w-full px-8 ${
-              pathname === "/sales" ? "active" : ""
+              pathname === "/dashboard/sales" ? "active" : ""
             }`}
-            href="/sales"
+            href="/dashboard/sales"
           >
             Sales
           </Link>
           <Link
             className={`link w-full px-8 ${
-              pathname === "/item" ? "active" : ""
+              pathname === "/dashboard/item" ? "active" : ""
             }`}
-            href="/item"
+            href="/dashboard/item"
           >
             Item
           </Link>
           <Link
             className={`link w-full px-8 ${
-              pathname === "/role" ? "active" : ""
+              pathname === "/dashboard/role" ? "active" : ""
             }`}
-            href="/role"
+            href="/dashboard/role"
           >
             Role
           </Link>
           <Link
             className={`w-full px-8 link ${
-              pathname === "/customer" ? "active" : ""
+              pathname === "/dashboard/customer" ? "active" : ""
             }`}
-            href="/customer"
+            href="/dashboard/customer"
           >
             Customer
           </Link>
           <Link
             className={`link w-full px-8 ${
-              pathname === "/user" ? "active" : ""
+              pathname === "/dashboard/user" ? "active" : ""
             }`}
-            href="/user"
+            href="/dashboard/user"
           >
             User
           </Link>
           <Link
             className={`link w-full px-8 ${
-              pathname === "/setting" ? "active" : ""
+              pathname === "/dashboard/setting" ? "active" : ""
             }`}
-            href="/setting"
+            href="/dashboard/setting"
           >
             Setting
           </Link>
         </aside>
-        <div className="py-6 w-full px-8">Log Out</div>
+        <p className="py-6 w-full px-8 cursor-pointer" onClick={logout}>
+          Log Out
+        </p>
       </div>
     </>
   );
