@@ -13,9 +13,11 @@ const Add = () => {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [zip, setZip] = useState("");
+  const [is_vendor, setIs_vendor]=useState(false)
   const token =
     "eyJpZCI6MTIsImZpcnN0X25hbWUiOiJiaGF0IiwibWlkZGxlX25hbWUiOm51bGwsImxhc3RfbmFtZSI6ImJoYXR0YXJhaSIsImVtYWlsIjoiYmhoYXR0dEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR3Nklrb1ZoVU5xdm91dUx0M0cyNXVPWW15bGpvVnR1L2NYSnd0aFFIVTlOYXpRUlFhRDJCaSIsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDI0LTA3LTMxVDA2OjI3OjU1Ljc5NloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNy0zMVQwNjoyNzo1NS43OTZaIiwiaWF0IjoxNzIyNDg5Nzg4fQ";
 
+  
   const createCustomer = async () => {
     const isVendor=""
     try {
@@ -143,6 +145,8 @@ const Add = () => {
             name="fav_language"
             defaultValue="no"
             className="mt-4 "
+            checked={is_vendor}
+            onChange={(e)=>setIs_vendor(e.target.checked)}
           />
         </div>
         <input

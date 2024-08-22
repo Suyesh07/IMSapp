@@ -10,17 +10,17 @@ export function middleware(req: NextRequest) {
     }
 
     //retriving the token to see if user is logged in 
-    const cookieStore = cookies();
-    const token = cookieStore?.get('token')?.value || "";
+    // const cookieStore = cookies();
+    // const token = cookieStore?.get('token')?.value || "";
 
-    // if its a public route and they are logged in we want to navigate away
-    if (isPublic && token !== "") {
-        return NextResponse.redirect(new URL("/", BASE_URL));
-    }
+    // // if its a public route and they are logged in we want to navigate away
+    // if (isPublic && token !== "") {
+    //     return NextResponse.redirect(new URL("/", BASE_URL));
+    // }
 
-    if (!isPublic && token === "") {
-        return NextResponse.redirect(new URL("/login", BASE_URL));
-    }
+    // if (!isPublic && token === "") {
+    //     return NextResponse.redirect(new URL("/login", BASE_URL));
+    // }
     return NextResponse.next();
 
     
