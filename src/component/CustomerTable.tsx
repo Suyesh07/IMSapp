@@ -1,10 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Action from "./Action";
 import axios from "axios";
 
+interface Customer {
+  name: string;
+  email: string;
+  phone: string;
+  street_address: string;
+  city: string;
+  province: string;
+  is_vender: boolean;
+
+}
+
 const CustomerTable = () => {
-  const router = useRouter();
+  const [customerData, setCustomerData] = useState<Customer[]>([])
   const tableHeader = [
     "Name",
     "Email",
@@ -61,8 +72,25 @@ const CustomerTable = () => {
       console.error(error);
     }
   };
+
+  const getCustomerData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/customers",
+        {
+          headers: {
+            "Content-Type": "Application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      setCustomerData(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const deleteCustomer = async (id: string) => {
-    const isVendor = "";
     try {
       const response = await axios.delete(
         `http://localhost:8000/customers/${id}`,
@@ -79,6 +107,12 @@ const CustomerTable = () => {
     }
   };
 
+  useEffect(() => {
+   getCustomerData()
+    },
+   [])
+  
+
   return (
     <div>
       <div className="relative overflow-x-auto mt-6 ml-10">
@@ -93,7 +127,7 @@ const CustomerTable = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((value, index) => (
+            {customerData.map((value, index) => (
               <tr className="bg-white border-b" key={index}>
                 <th
                   scope="row"
@@ -103,8 +137,8 @@ const CustomerTable = () => {
                 </th>
                 <td className="px-6">{value.email}</td>
                 <td className="px-6">{value.phone}</td>
-                <td className="px-6 text-wrap">{value.address}</td>
-                <td className="px-6">{value.isVendor}</td>
+                <td className="px-6 text-wrap">{`${value.street_address}, ${value.city}, ${value.province}`}</td>
+                <td className="px-6">{value.is_vender}</td>
                 <td>
                   <Action />
                 </td>
